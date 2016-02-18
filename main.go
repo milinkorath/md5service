@@ -1,3 +1,5 @@
+// Service used to return md5 checksum of the request body
+//curl --data "helloworld" http://localhost:8081
 package main
 
 import (
@@ -19,7 +21,6 @@ func md5Sum(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		io.WriteString(w, "Error has occured while reading body content")
 	}
-	fmt.Fprint(w, string(body))
 	checksum := md5.Sum(body)
 	fmt.Fprintf(w, "%x\n", checksum)
 }
